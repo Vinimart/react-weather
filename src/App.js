@@ -1,13 +1,11 @@
-import apiKey from "./apiKey";
+import SearchBox from "./components/SearchBox";
 
 function App() {
 	return (
 		<div className="App">
 			<main>
 				<div className="weather-container">
-					<div className="search-box">
-						<input type="text" className="search-bar" placeholder="Cidade"></input>
-					</div>
+					<SearchBox />
 
 					<div className="weather-main">
 						<div className="location-box">
