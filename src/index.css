@@ -18,10 +18,13 @@ main {
 
 .App {
   color: #303030;
-  background-image: url("./assets/warm-bg.jpg");
   background-size: cover;
   background-position: bottom;
-  transition: 0.4s;
+  transition: 0.5s;
+}
+
+.App.warm {
+  background-image: url("./assets/warm-bg.jpg");
 }
 
 .App.cold {

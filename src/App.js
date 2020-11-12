@@ -1,12 +1,10 @@
-import WeatherMain from "./components/WeatherMain"
+import WeatherMain from "./components/WeatherMain";
 
 function App() {
 	return (
-		<div className="App hot">
+		<div className="App">
 			<main>
-				<div className="weather-container">
-					<WeatherMain />
-				</div>
+				<WeatherMain />
 			</main>
 		</div>
 	);
