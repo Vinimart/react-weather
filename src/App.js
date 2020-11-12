@@ -3,7 +3,7 @@ import WeatherMain from "./components/WeatherMain";
 
 function App() {
 	return (
-		<div className="App">
+		<div className="App hot">
 			<main>
 				<div className="weather-container">
 					<SearchBox />
