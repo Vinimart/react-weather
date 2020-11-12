@@ -1,4 +1,3 @@
-import SearchBox from "./components/SearchBox";
 import WeatherMain from "./components/WeatherMain";
 
 function App() {
@@ -6,8 +5,6 @@ function App() {
 		<div className="App hot">
 			<main>
 				<div className="weather-container">
-					<SearchBox />
-
 					<WeatherMain />
 				</div>
 			</main>

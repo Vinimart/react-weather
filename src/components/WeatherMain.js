@@ -1,6 +1,8 @@
 import React from "react";
-import LocationBox from "./LocationBox";
 import GetApi from "./GetApi";
+import SearchBox from "./SearchBox";
+import LocationBox from "./LocationBox";
+import WeatherBox from "./WeatherBox";
 
 export default class WeatherMain extends React.Component {
 	constructor() {
@@ -10,7 +12,6 @@ export default class WeatherMain extends React.Component {
 
 	componentDidMount() {
 		this.getApi.fetchWeather().then((res) => {
-
 			this.weather = {
 				city: res.name,
 				country: res.sys.country,
@@ -25,12 +26,12 @@ export default class WeatherMain extends React.Component {
 	render() {
 		if (this.weather !== undefined) {
 			return (
-				<div className="weather-main">
-					<LocationBox city={this.weather.city} country={this.weather.country} />
+				<div>
+					<SearchBox />
 
-					<div className="weather-box">
-						<div className="temp">{this.weather.temp}</div>
-						<div className="weather">{this.weather.desc}</div>
+					<div className="weather-main">
+						<LocationBox city={this.weather.city} country={this.weather.country} />
+						<WeatherBox temp={this.weather.temp} desc={this.weather.desc} />
 					</div>
 				</div>
 			);
