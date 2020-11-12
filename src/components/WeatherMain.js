@@ -54,12 +54,15 @@ export default class WeatherMain extends React.Component {
 
 	handleChange(e) {
 		this.setState({ value: e.target.value });
-		
 	}
 
 	keyPress(e) {
 		if (e.keyCode === 13) {
-			this.fetchApi();
+			if (this.prevQuery === this.state.value) {
+				return;
+			} else {
+				this.fetchApi();
+			}
 		}
 	}
 
@@ -74,10 +77,10 @@ export default class WeatherMain extends React.Component {
 					desc: res.weather[0].description,
 				};
 
+				this.prevQuery = this.state.value;
 				this.app = document.querySelector(".App");
 				this.changeBackground(this.weather.temp);
 				this.forceUpdate();
-				console.log('enviou');
 			})
 			.catch(() => {
 				alert("Por favor, insira uma localização válida");
