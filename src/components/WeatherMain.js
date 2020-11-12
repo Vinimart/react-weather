@@ -38,7 +38,6 @@ export default class WeatherMain extends React.Component {
 				break;
 
 			default:
-				console.log("default case");
 				this.setBackground(this.bg);
 				break;
 		}
@@ -99,9 +98,7 @@ export default class WeatherMain extends React.Component {
 						<LocationBox city={this.weather.city} country={this.weather.country} />
 						<WeatherBox temp={this.weather.temp} desc={this.weather.desc} />
 					</div>
-				) : (
-					""
-				)}
+				) : ("")}
 			</div>
 		);
 	}
