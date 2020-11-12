@@ -6,24 +6,31 @@ export default class WeatherMain extends React.Component {
 	constructor() {
 		super();
 		this.getApi = new GetApi();
-		this.state = { result: {} };
 	}
 
 	componentDidMount() {
 		this.getApi.fetchWeather().then((res) => {
-			this.setState({ result: res });
+
+			this.weather = {
+				city: res.name,
+				country: res.sys.country,
+				temp: res.main.temp,
+				desc: res.weather[0].description,
+			};
+
+			this.forceUpdate();
 		});
-   }
+	}
 
 	render() {
-		if (this.state.result !== undefined) {
+		if (this.weather !== undefined) {
 			return (
 				<div className="weather-main">
-					<LocationBox city={this.state.result.name} country="" />
+					<LocationBox city={this.weather.city} country={this.weather.country} />
 
 					<div className="weather-box">
-						<div className="temp">21ºC</div>
-						<div className="weather">Nublado</div>
+						<div className="temp">{this.weather.temp}</div>
+						<div className="weather">{this.weather.desc}</div>
 					</div>
 				</div>
 			);
