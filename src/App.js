@@ -1,4 +1,4 @@
-import WeatherMain from "./components/WeatherMain";
+import WeatherMain from "./components/WeatherMain"
 
 function App() {
 	return (
