@@ -10,7 +10,7 @@ export default class WeatherMain extends React.Component {
 		super();
 		this.getApi = new GetApi();
 
-		// API Initial query
+		// API Initial search value
 		this.state = { value: "Itajaí" };
 
 		// Search Input event handlers

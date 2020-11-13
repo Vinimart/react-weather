@@ -8,12 +8,12 @@ export default class Preloader extends React.Component {
         this.hideLoader = this.hideLoader.bind(this);
     }
 
-    // Hide the preloader when the page is loaded.
+    // Hides the preloader when the page is loaded.
     // SetTimeout is used here to ensure that the background image of the page is completely loaded.
     hideLoader() {
         setTimeout(() => {
             this.preloader.style.display = "none";
-        }, 1000);
+        }, 3000);
     }
 
     // Render the WeatherMain components when the page is fully loaded.
