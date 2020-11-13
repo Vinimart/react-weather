@@ -114,7 +114,7 @@ export default class WeatherMain extends React.Component {
 			});
 	}
 
-	// The LocationBox and WeatherBox components will only be rendered when there is a positive response from Promisse.
+	// The LocationBox and WeatherBox components will only be rendered when there is a positive response from Promise.
 	render() {
 		return (
 			<div className="weather-container">
