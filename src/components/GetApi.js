@@ -1,12 +1,12 @@
 import React from "react";
 import ApiKey from "./ApiKey";
 
+// Free API from "Open Weather".
 export default class GetApi extends React.Component {
 	constructor() {
 		super();
 		this.key = ApiKey.key;
 		this.base = ApiKey.base;
-		// this.query = "Brasília";
 		this.lang = "pt_br";
 		this.unit = "metric";
 	}

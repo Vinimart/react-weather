@@ -3,17 +3,27 @@ import GetApi from "./GetApi";
 import LocationBox from "./WeatherMain/LocationBox";
 import WeatherBox from "./WeatherMain/WeatherBox";
 
+// MVC was not implemented in this project, but this class can be compared with a Controller Layer,
+// since most of the components of the project is managed by this class.
 export default class WeatherMain extends React.Component {
 	constructor() {
 		super();
 		this.getApi = new GetApi();
+
+		// API Initial query
 		this.state = { value: "Itajaí" };
+
+		// Search Input event handlers
 		this.handleChange = this.handleChange.bind(this);
 		this.keyPress = this.keyPress.bind(this);
+
+		// Calls the promise right at the initialization of the component.
 		this.fetchApi();
 	}
 
+	// Identifies the range of temperature values ​​and associates it with a background image through CSS classes.
 	changeBackground(temp) {
+		this.app = document.querySelector(".App");
 		this.bg = "warm";
 
 		switch (true) {
@@ -43,6 +53,9 @@ export default class WeatherMain extends React.Component {
 		}
 	}
 
+	// This method checks the size of the classList and removes any class other than "App". 
+	// Soon afterwards it assigns the class referring to a background image.
+	// This prevents classes from accumulating in the element's classList when there are background image changes
 	setBackground(bg) {
 		const classList = this.app.classList;
 		while (classList.length > 1) {
@@ -51,11 +64,16 @@ export default class WeatherMain extends React.Component {
 		this.app.classList.add(bg);
 	}
 
+	// Event handles:
+	// Stores a string whenever the state of the input target value changes.
 	handleChange(e) {
 		this.setState({ value: e.target.value });
 	}
 
+	// This method, in addition to handling the keyDown event of the input search, prevents multiple requests to 
+	// the API from happening when the same value is sent more than once in a row.
 	keyPress(e) {
+		// "Enter" key
 		if (e.keyCode === 13) {
 			if (this.prevQuery === this.state.value) {
 				return;
@@ -65,12 +83,15 @@ export default class WeatherMain extends React.Component {
 		}
 	}
 
+	// Main method. Performs the HTTP request and handles the Promisse result.
 	fetchApi() {
 		this.getApi
 			.fetchWeather(this.state.value)
 			.then((res) => {
+				// Tells the Preloader component that the content is alredy loaded.
 				this.props.onLoaded();
 
+				// Only the response data that will be used
 				this.weather = {
 					city: res.name,
 					country: res.sys.country,
@@ -78,9 +99,14 @@ export default class WeatherMain extends React.Component {
 					desc: res.weather[0].description,
 				};
 
+				// Stores the last result obtained through the HTTP request.
 				this.prevQuery = this.state.value;
-				this.app = document.querySelector(".App");
+
+				// Changes the background image.
 				this.changeBackground(this.weather.temp);
+
+				// Forces a break in the component's life cycle in order to update the component's state with the data
+				// obtained by the request.
 				this.forceUpdate();
 			})
 			.catch(() => {
@@ -88,6 +114,7 @@ export default class WeatherMain extends React.Component {
 			});
 	}
 
+	// The LocationBox and WeatherBox components will only be rendered when there is a positive response from Promisse.
 	render() {
 		return (
 			<div className="weather-container">
