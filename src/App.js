@@ -1,10 +1,12 @@
-import WeatherMain from "./components/WeatherMain";
+import React from "react";
+import Preloader from "./components/Preloader";
 
 function App() {
 	return (
 		<div className="App">
 			<main>
-				<WeatherMain />
+				<Preloader />
+				
 			</main>
 		</div>
 	);

@@ -69,6 +69,8 @@ export default class WeatherMain extends React.Component {
 		this.getApi
 			.fetchWeather(this.state.value)
 			.then((res) => {
+				this.props.onLoaded();
+
 				this.weather = {
 					city: res.name,
 					country: res.sys.country,
@@ -82,7 +84,7 @@ export default class WeatherMain extends React.Component {
 				this.forceUpdate();
 			})
 			.catch(() => {
-				alert("Por favor, insira uma localização válida");
+				console.warn("Por favor, insira uma localização válida");
 			});
 	}
 
@@ -90,7 +92,7 @@ export default class WeatherMain extends React.Component {
 		return (
 			<div className="weather-container">
 				<div className="search-box">
-					<input type="text" className="search-bar" autoFocus placeholder="Insira uma localização e pressione 'enter'" value={this.state.value} onKeyDown={this.keyPress} onChange={this.handleChange}></input>
+					<input type="text" className="search-bar" placeholder="Insira uma localização e pressione 'enter'" value={this.state.value} onKeyDown={this.keyPress} onChange={this.handleChange}></input>
 				</div>
 
 				{this.weather ? (
@@ -98,7 +100,9 @@ export default class WeatherMain extends React.Component {
 						<LocationBox city={this.weather.city} country={this.weather.country} />
 						<WeatherBox temp={this.weather.temp} desc={this.weather.desc} />
 					</div>
-				) : ("")}
+				) : (
+					""
+				)}
 			</div>
 		);
 	}
